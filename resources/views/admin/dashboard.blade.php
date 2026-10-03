@@ -12,6 +12,10 @@
             <p class="mt-1 text-sm text-[#8B5E3C]">Pantau penjualan, order, dan kondisi operasional hari ini.</p>
             <div class="mt-4 flex flex-wrap gap-2">
                 <a href="{{ route('admin.products') }}" class="rounded-xl bg-[#3D2418] px-4 py-2.5 text-xs font-semibold text-[#F5E9D3]">Kelola Produk</a>
+                <a href="{{ route('admin.categories') }}" class="rounded-xl border border-[#E4D4B8] bg-white px-4 py-2.5 text-xs font-semibold text-[#3D2418]">Kelola Kategori</a>
+                <a href="{{ route('admin.suppliers') }}" class="rounded-xl border border-[#E4D4B8] bg-white px-4 py-2.5 text-xs font-semibold text-[#3D2418]">Kelola Supplier</a>
+                <a href="{{ route('admin.users') }}" class="rounded-xl border border-[#E4D4B8] bg-white px-4 py-2.5 text-xs font-semibold text-[#3D2418]">Kelola Pengguna</a>
+                <a href="{{ route('admin.reports') }}" class="rounded-xl border border-[#E4D4B8] bg-white px-4 py-2.5 text-xs font-semibold text-[#3D2418]">Laporan Penjualan</a>
                 <a href="{{ route('admin.export.orders') }}" class="rounded-xl border border-[#E4D4B8] bg-white px-4 py-2.5 text-xs font-semibold text-[#3D2418]">Export Order CSV</a>
                 <a href="{{ route('admin.export.stock-movements') }}" class="rounded-xl border border-[#E4D4B8] bg-white px-4 py-2.5 text-xs font-semibold text-[#3D2418]">Export Stok CSV</a>
             </div>
@@ -53,7 +57,7 @@
                     @forelse($recentOrders as $order)
                         <div class="flex items-center justify-between gap-4 px-5 py-4">
                             <div class="min-w-0">
-                                <p class="truncate text-sm font-semibold text-[#2B1810]">{{ $order->order_number }}</p>
+                                <a href="{{ route('admin.orders.show', $order) }}" class="truncate text-sm font-semibold text-[#2B1810] underline decoration-[#C9A982] underline-offset-2">{{ $order->order_number }}</a>
                                 <p class="mt-1 text-xs text-[#8B5E3C]">{{ $order->user?->name ?? 'Guest' }} · {{ $order->created_at->format('d M Y, H:i') }}</p>
                             </div>
                             <div class="shrink-0 text-right">

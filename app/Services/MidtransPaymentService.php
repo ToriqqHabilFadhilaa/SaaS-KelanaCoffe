@@ -3,11 +3,11 @@
 namespace App\Services;
 
 use App\Models\Order;
+use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 use Midtrans\Config;
 use Midtrans\Snap;
 use Midtrans\Transaction;
-use Illuminate\Support\Facades\DB;
 
 class MidtransPaymentService
 {
@@ -92,16 +92,25 @@ class MidtransPaymentService
         $isFailed = in_array($transactionStatus, ['cancel', 'deny', 'expire', 'failure'], true);
 
         DB::transaction(function () use ($order, $payload, $isPaid, $isFailed, $inventoryService) {
-            $order->refresh();
+            $order = Order::query()->lockForUpdate()->findOrFail($order->id);
 
             if ($order->status !== Order::STATUS_PENDING) {
                 return;
             }
 
             if ($isPaid) {
+                $paidAmount = (float) ($payload['gross_amount'] ?? 0);
+
+                if (abs($paidAmount - (float) $order->total) >= 0.01
+                    || (($payload['currency'] ?? 'IDR') !== 'IDR')) {
+                    report(new \UnexpectedValueException('Midtrans payment amount or currency does not match the order.'));
+
+                    return;
+                }
+
                 $order->update([
                     'status' => Order::STATUS_COMPLETED,
-                    'paid_amount' => (float) ($payload['gross_amount'] ?? $order->total),
+                    'paid_amount' => $paidAmount,
                     'paid_at' => now(),
                 ]);
 

@@ -15,7 +15,8 @@
             <a href="{{ route('inventory.dashboard') }}" class="rounded-xl border border-[#E4D4B8] bg-white px-4 py-2.5 text-sm font-semibold text-[#3D2418] hover:bg-[#FAF3E7]">Kembali ke Inventory</a>
         </div>
 
-        <form method="GET" action="{{ route('inventory.movements') }}" class="mt-6 flex flex-col gap-3 rounded-2xl border border-[#E4D4B8] bg-white p-4 sm:flex-row">
+        <form method="GET" action="{{ route('inventory.movements') }}" class="mt-6 grid gap-3 rounded-2xl border border-[#E4D4B8] bg-white p-4 sm:grid-cols-2 xl:grid-cols-5">
+            <input type="search" name="search" value="{{ request('search') }}" placeholder="Cari bahan atau SKU" class="rounded-xl border border-[#E4D4B8] px-3 py-2 text-sm outline-none focus:border-[#8B5E3C]">
             <select name="type" class="rounded-xl border border-[#E4D4B8] bg-white px-3 py-2 text-sm outline-none focus:border-[#8B5E3C]">
                 <option value="">Semua tipe</option>
                 <option value="in" @selected(request('type') === 'in')>Stok masuk</option>
@@ -28,6 +29,8 @@
                 <option value="damage" @selected(request('reason') === 'damage')>Rusak</option>
                 <option value="adjustment" @selected(request('reason') === 'adjustment')>Koreksi</option>
             </select>
+            <input type="date" name="from" value="{{ request('from') }}" aria-label="Dari tanggal" class="rounded-xl border border-[#E4D4B8] px-3 py-2 text-sm outline-none focus:border-[#8B5E3C]">
+            <input type="date" name="to" value="{{ request('to') }}" aria-label="Sampai tanggal" class="rounded-xl border border-[#E4D4B8] px-3 py-2 text-sm outline-none focus:border-[#8B5E3C]">
             <button type="submit" class="rounded-xl bg-[#3D2418] px-4 py-2 text-sm font-semibold text-[#F5E9D3]">Filter</button>
         </form>
 
@@ -42,7 +45,9 @@
                             <th class="px-5 py-3 font-semibold">Alasan</th>
                             <th class="px-5 py-3 font-semibold">Jumlah</th>
                             <th class="px-5 py-3 font-semibold">Stok setelah</th>
+                            <th class="px-5 py-3 font-semibold">Supplier</th>
                             <th class="px-5 py-3 font-semibold">User</th>
+                            <th class="px-5 py-3 font-semibold">Catatan</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-[#E4D4B8]">
@@ -54,10 +59,12 @@
                                 <td class="px-5 py-4 text-[#5C3523]">{{ ucfirst($movement->reason) }}</td>
                                 <td @class(['px-5 py-4 font-bold', 'text-emerald-700' => $movement->type === 'in', 'text-rose-700' => $movement->type === 'out'])>{{ $movement->type === 'in' ? '+' : '-' }}{{ rtrim(rtrim(number_format((float) $movement->qty, 2, ',', '.'), '0'), ',') }}</td>
                                 <td class="px-5 py-4 text-[#5C3523]">{{ rtrim(rtrim(number_format((float) $movement->stock_after, 2, ',', '.'), '0'), ',') }}</td>
+                                <td class="px-5 py-4 text-[#5C3523]">{{ $movement->supplier?->name ?? '-' }}</td>
                                 <td class="px-5 py-4 text-[#5C3523]">{{ $movement->user?->name ?? 'System' }}</td>
+                                <td class="max-w-xs px-5 py-4 text-xs text-[#8B5E3C]">{{ $movement->note ?: '-' }}</td>
                             </tr>
                         @empty
-                            <tr><td colspan="7" class="px-5 py-14 text-center text-sm text-[#8B5E3C]">Belum ada pergerakan stok.</td></tr>
+                            <tr><td colspan="9" class="px-5 py-14 text-center text-sm text-[#8B5E3C]">Belum ada pergerakan stok.</td></tr>
                         @endforelse
                     </tbody>
                 </table>

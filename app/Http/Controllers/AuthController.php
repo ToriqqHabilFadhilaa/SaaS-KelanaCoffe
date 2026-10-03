@@ -37,9 +37,11 @@ class AuthController extends Controller
 
         $status = Password::sendResetLink($credentials);
 
-        return $status === Password::RESET_LINK_SENT
-            ? back()->with('status', 'Link reset password sudah dikirim ke email Anda.')
-            : back()->withErrors(['email' => 'Email tidak ditemukan atau link gagal dikirim.']);
+        if ($status !== Password::RESET_LINK_SENT) {
+            report(new \RuntimeException('Password reset link request failed with status: '.$status));
+        }
+
+        return back()->with('status', 'Jika email terdaftar, link reset password akan dikirim.');
     }
 
     public function showResetPassword(string $token)

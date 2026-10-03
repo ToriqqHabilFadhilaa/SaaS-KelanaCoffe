@@ -12,7 +12,10 @@
                 <h1 class="mt-1 text-2xl font-bold text-[#2B1810]">Kelola Produk</h1>
                 <p class="mt-1 text-sm text-[#8B5E3C]">Admin bertanggung jawab atas gambar dan katalog makanan kasir.</p>
             </div>
-            <a href="{{ route('admin.dashboard') }}" class="rounded-xl border border-[#E4D4B8] bg-white px-4 py-2.5 text-center text-sm font-semibold text-[#3D2418] hover:bg-[#FAF3E7]">Kembali ke Overview</a>
+            <div class="flex gap-2">
+                <a href="{{ route('admin.dashboard') }}" class="rounded-xl border border-[#E4D4B8] bg-white px-4 py-2.5 text-center text-sm font-semibold text-[#3D2418] hover:bg-[#FAF3E7]">Overview</a>
+                <a href="{{ route('admin.products.create') }}" class="rounded-xl bg-[#3D2418] px-4 py-2.5 text-center text-sm font-semibold text-[#F5E9D3] hover:bg-[#2B1810]">Tambah Produk</a>
+            </div>
         </div>
 
         @if (session('status'))
@@ -39,7 +42,10 @@
                         <div>
                             <p class="font-bold text-[#2B1810]">{{ $product->name }}</p>
                             <p class="mt-1 text-xs text-[#8B5E3C]">{{ $product->sku }} · {{ $product->category?->name ?? 'Tanpa kategori' }}</p>
+                            <p class="mt-1 text-sm font-semibold text-[#3D2418]">Rp{{ number_format((float) $product->price, 0, ',', '.') }}</p>
+                            <span class="mt-2 inline-flex rounded-full px-2.5 py-1 text-[10px] font-semibold {{ $product->is_active ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700' }}">{{ $product->is_active ? 'Aktif di Kasir' : 'Nonaktif' }}</span>
                         </div>
+                        <a href="{{ route('admin.products.edit', $product) }}" class="block rounded-xl border border-[#E4D4B8] px-4 py-2 text-center text-xs font-semibold text-[#3D2418] hover:bg-[#FAF3E7]">Edit Produk &amp; Resep</a>
                         <form method="POST" action="{{ route('admin.products.image', $product) }}" enctype="multipart/form-data" class="space-y-2">
                             @csrf
                             <label class="block text-xs font-semibold text-[#5C3523]" for="image-{{ $product->id }}">Ganti gambar makanan</label>

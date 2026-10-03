@@ -1,2 +1,14 @@
 User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /cashier/
+Disallow: /inventory/
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /reset-password/
+Disallow: /email/
+Disallow: /midtrans/
+Allow: /assets/
+Allow: /build/
+
+# Kelana Coffee POS adalah workspace internal — tidak ada sitemap publik.

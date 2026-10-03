@@ -88,6 +88,12 @@
                                             @csrf
                                             <input type="hidden" name="ingredient_id" value="{{ $ingredient->id }}">
                                             <input type="number" name="qty" min="0.01" step="0.01" placeholder="Jumlah masuk" required class="w-28 rounded-lg border border-[#E4D4B8] px-2.5 py-2 text-sm outline-none focus:border-[#8B5E3C] focus:ring-2 focus:ring-[#8B5E3C]/20">
+                                            <select name="supplier_id" aria-label="Supplier stok masuk" class="max-w-36 rounded-lg border border-[#E4D4B8] bg-white px-2 py-2 text-xs outline-none focus:border-[#8B5E3C]">
+                                                <option value="">Supplier</option>
+                                                @foreach($suppliers as $supplier)
+                                                    <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                                                @endforeach
+                                            </select>
                                             <button type="submit" class="rounded-lg border border-emerald-600 px-3 py-2 text-xs font-semibold text-emerald-700 hover:bg-emerald-50">+ Masuk</button>
                                         </form>
                                         <form method="POST" action="{{ route('inventory.stock-out') }}" class="flex items-center gap-2">

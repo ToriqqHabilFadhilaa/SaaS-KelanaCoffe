@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reset Password - Kelana Coffee</title>
+    <meta name="description" content="Atur ulang password akun Kelana Coffee POS dengan aman.">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Kelana Coffee">
+    <meta property="og:title" content="Reset Password - Kelana Coffee POS">
+    <meta property="og:description" content="Atur ulang password untuk mengakses workspace Kelana Coffee.">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-[#FAF3E7] text-[#2B1810]" style="background-image: url('{{ asset('assets/Background.png') }}');">

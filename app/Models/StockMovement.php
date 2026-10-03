@@ -20,6 +20,7 @@ class StockMovement extends Model
 
     protected $fillable = [
         'ingredient_id',
+        'supplier_id',
         'user_id',
         'type',
         'reason',
@@ -50,6 +51,11 @@ class StockMovement extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
     }
 
     public function reference()

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Nota - {{ $order->order_number }}</title>
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="description" content="Nota transaksi Kelana Coffee {{ $order->order_number }}.">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-[#FAF3E7] p-6 text-[#2B1810]">

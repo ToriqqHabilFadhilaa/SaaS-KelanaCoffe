@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title }} - Kelana Coffee</title>
+    <meta name="description" content="{{ $description ?? 'Kelana Coffee POS dan inventory workspace.' }}">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Kelana Coffee">
+    <meta property="og:title" content="{{ $title }} - Kelana Coffee">
+    <meta property="og:description" content="{{ $description ?? 'Kelana Coffee POS dan inventory workspace.' }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body @class([
@@ -82,6 +88,10 @@
                 <nav class="flex min-w-0 items-center gap-1 overflow-x-auto" aria-label="Menu admin">
                     <a href="{{ route('admin.dashboard') }}" class="rounded-lg bg-[#3D2418] px-3 py-2 text-xs font-semibold text-[#F5E9D3]">Overview</a>
                     <a href="{{ route('admin.products') }}" class="rounded-lg px-3 py-2 text-xs font-semibold text-[#8B5E3C] transition hover:bg-[#FAF3E7]">Produk</a>
+                    <a href="{{ route('admin.categories') }}" class="rounded-lg px-3 py-2 text-xs font-semibold text-[#8B5E3C] transition hover:bg-[#FAF3E7]">Kategori</a>
+                    <a href="{{ route('admin.suppliers') }}" class="rounded-lg px-3 py-2 text-xs font-semibold text-[#8B5E3C] transition hover:bg-[#FAF3E7]">Supplier</a>
+                    <a href="{{ route('admin.users') }}" class="rounded-lg px-3 py-2 text-xs font-semibold text-[#8B5E3C] transition hover:bg-[#FAF3E7]">Pengguna</a>
+                    <a href="{{ route('admin.reports') }}" class="rounded-lg px-3 py-2 text-xs font-semibold text-[#8B5E3C] transition hover:bg-[#FAF3E7]">Laporan</a>
                 </nav>
 
                 <div class="hidden shrink-0 items-center gap-3 sm:flex">

@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Masuk - Kelana Coffee</title>
+    <meta name="description" content="Masuk ke Kelana Coffee POS untuk mengelola penjualan dan persediaan kedai.">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Kelana Coffee">
+    <meta property="og:title" content="Masuk - Kelana Coffee POS">
+    <meta property="og:description" content="Portal operasional Kasir, Inventory, dan Admin Kelana Coffee.">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body @class(['min-h-screen', 'bg-[#2B1810]', 'text-[#2B1810]'])>
